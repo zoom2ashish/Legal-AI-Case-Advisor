@@ -793,6 +793,7 @@ Our legal research for your matter includes AI-assisted case law and statute sea
             
         except Exception as e:
             logger.error(f"Ethics compliance health check failed: {str(e)}")
+<<<<<<< HEAD
             return False
 
     # Additional methods needed by the main app
@@ -806,3 +807,6 @@ Our legal research for your matter includes AI-assisted case law and statute sea
 
 # Create alias for the class name used in main app
 LegalEthicsMonitoring = LegalEthicsComplianceManager
+=======
+            return False
+>>>>>>> 6c3aac01d38711e21958dc83ff6d611bbc727be6

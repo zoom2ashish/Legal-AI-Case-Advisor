@@ -678,6 +678,7 @@ class AttorneyClientPrivilegeManager:
             
         except Exception as e:
             logger.error(f"Privilege protection health check failed: {str(e)}")
+<<<<<<< HEAD
             return False
 
     # Additional methods needed by the main app
@@ -765,3 +766,6 @@ class AttorneyClientPrivilegeManager:
                 continue
                 
         return decrypted_history
+=======
+            return False
+>>>>>>> 6c3aac01d38711e21958dc83ff6d611bbc727be6

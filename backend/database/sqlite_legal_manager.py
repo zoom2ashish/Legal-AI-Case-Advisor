@@ -1166,6 +1166,7 @@ class LegalDataManager:
             logger.error(f"Failed to get legal database stats: {str(e)}")
             return {}
     
+<<<<<<< HEAD
     # Additional methods needed by the main app
     def store_legal_research(self, attorney_id: str, client_id: str, query: str, 
                            research_result: Dict[str, Any], jurisdiction: str) -> bool:
@@ -1311,6 +1312,8 @@ class LegalDataManager:
             logger.error(f"Failed to log privileged audit event: {str(e)}")
             return False
 
+=======
+>>>>>>> 6c3aac01d38711e21958dc83ff6d611bbc727be6
     def close(self):
         """Close database connection"""
         if self.conn:

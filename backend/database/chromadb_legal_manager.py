@@ -900,6 +900,7 @@ class LegalKnowledgeStore:
             
         except Exception as e:
             logger.error(f"Legal knowledge store health check failed: {str(e)}")
+<<<<<<< HEAD
             return False
 
     # Additional methods needed by agents
@@ -964,3 +965,6 @@ class LegalKnowledgeStore:
         except Exception as e:
             logger.error(f"Failed to search regulations: {str(e)}")
             return []
+=======
+            return False
+>>>>>>> 6c3aac01d38711e21958dc83ff6d611bbc727be6
