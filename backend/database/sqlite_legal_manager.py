@@ -28,16 +28,30 @@ class LegalDataManager:
         self.conn.row_factory = sqlite3.Row  # Enable dict-like access
         
         # Initialize encryption for privileged communications
-        self.encryption_key = os.getenv('LEGAL_ENCRYPTION_KEY')
-        if not self.encryption_key:
-            # Generate key for demo (DO NOT do this in production)
-            self.encryption_key = Fernet.generate_key()
-            logger.warning("Generated encryption key for demo - use proper key management in production")
-        
+        self.encryption_key = self._initialize_encryption_key()
         self.cipher = Fernet(self.encryption_key)
         
         self._create_legal_tables()
         logger.info("Legal SQLite database initialized successfully")
+    
+    def _initialize_encryption_key(self) -> bytes:
+        """Initialize or load master encryption key for database"""
+        try:
+            # In production, load from secure key management system
+            key_env = os.getenv('LEGAL_ENCRYPTION_KEY')
+            if key_env and len(key_env) == 44:  # Fernet keys are 44 characters base64
+                return key_env.encode()
+            else:
+                # Generate new key for demo (DO NOT use in production)
+                key = Fernet.generate_key()
+                logger.warning("Generated encryption key for demo - use proper key management in production")
+                return key
+        except Exception as e:
+            logger.error(f"Failed to initialize encryption key: {str(e)}")
+            # Fallback: generate a new key
+            key = Fernet.generate_key()
+            logger.warning("Using fallback encryption key - use proper key management in production")
+            return key
     
     def _create_legal_tables(self):
         """Create database tables for legal data management"""
@@ -1166,7 +1180,6 @@ class LegalDataManager:
             logger.error(f"Failed to get legal database stats: {str(e)}")
             return {}
     
-<<<<<<< HEAD
     # Additional methods needed by the main app
     def store_legal_research(self, attorney_id: str, client_id: str, query: str, 
                            research_result: Dict[str, Any], jurisdiction: str) -> bool:
@@ -1312,8 +1325,6 @@ class LegalDataManager:
             logger.error(f"Failed to log privileged audit event: {str(e)}")
             return False
 
-=======
->>>>>>> 6c3aac01d38711e21958dc83ff6d611bbc727be6
     def close(self):
         """Close database connection"""
         if self.conn:

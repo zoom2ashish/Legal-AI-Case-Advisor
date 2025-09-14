@@ -328,7 +328,7 @@ LOG_FILE=logs/legal_app.log
             logger.info("Next steps:")
             logger.info("1. Edit .env file with your API keys")
             logger.info("2. Run: python backend/app.py")
-            logger.info("3. Access the system at http://localhost:5000")
+            logger.info("3. Access the system at http://localhost:5001")
             
         except Exception as e:
             logger.error(f"Setup failed: {e}")

@@ -51,8 +51,8 @@ class AttorneyClientPrivilegeManager:
         try:
             # In production, load from secure key management system
             key_env = os.getenv('LEGAL_PRIVILEGE_KEY')
-            if key_env:
-                return base64.urlsafe_b64decode(key_env)
+            if key_env and len(key_env) == 44:  # Fernet keys are 44 characters base64
+                return key_env.encode()
             else:
                 # Generate new key for demo (DO NOT use in production)
                 key = Fernet.generate_key()
@@ -60,7 +60,10 @@ class AttorneyClientPrivilegeManager:
                 return key
         except Exception as e:
             logger.error(f"Failed to initialize encryption key: {str(e)}")
-            raise
+            # Fallback: generate a new key
+            key = Fernet.generate_key()
+            logger.warning("Using fallback encryption key - use proper key management in production")
+            return key
     
     def create_secure_session(self, attorney_id: str, client_id: str = None,
                             session_context: Dict[str, Any] = None) -> Dict[str, Any]:
@@ -678,7 +681,6 @@ class AttorneyClientPrivilegeManager:
             
         except Exception as e:
             logger.error(f"Privilege protection health check failed: {str(e)}")
-<<<<<<< HEAD
             return False
 
     # Additional methods needed by the main app
@@ -766,6 +768,3 @@ class AttorneyClientPrivilegeManager:
                 continue
                 
         return decrypted_history
-=======
-            return False
->>>>>>> 6c3aac01d38711e21958dc83ff6d611bbc727be6

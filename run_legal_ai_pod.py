@@ -180,7 +180,7 @@ class LegalAIPodLauncher:
             time.sleep(3)
             
             if self.backend_process.poll() is None:
-                logger.info("Backend server started successfully on http://localhost:5000")
+                logger.info("Backend server started successfully on http://localhost:5001")
                 return True
             else:
                 logger.error("Backend server failed to start")
@@ -227,7 +227,7 @@ class LegalAIPodLauncher:
                     webbrowser.open("http://localhost:3000")
                     logger.info("Opened application in browser")
                 else:
-                    webbrowser.open("http://localhost:5000")
+                    webbrowser.open("http://localhost:5001")
                     logger.info("Opened backend API in browser")
             except Exception as e:
                 logger.debug(f"Failed to open browser: {e}")
@@ -326,7 +326,7 @@ class LegalAIPodLauncher:
         print("\n" + "="*60)
         print("Legal AI Pod - Case Intelligence System")
         print("="*60)
-        print(f"Backend API:  http://localhost:5000")
+        print(f"Backend API:  http://localhost:5001")
         
         if self.frontend_process and self.frontend_process.poll() is None:
             print(f"Frontend UI:  http://localhost:3000")

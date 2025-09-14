@@ -264,7 +264,7 @@ LOG_FILE=logs/legal_app.log
             # Try frontend first, then backend
             urls_to_try = [
                 "http://localhost:3000",  # React frontend
-                "http://localhost:5000"   # Flask backend
+                "http://localhost:5001"   # Flask backend
             ]
             
             for url in urls_to_try:
@@ -285,8 +285,8 @@ LOG_FILE=logs/legal_app.log
 
 📍 Access Points:
    • Frontend: http://localhost:3000 (if available)
-   • Backend API: http://localhost:5000
-   • API Documentation: http://localhost:5000/docs
+   • Backend API: http://localhost:5001
+   • API Documentation: http://localhost:5001/docs
 
 🔧 Configuration:
    • Edit backend/.env for API keys and settings
